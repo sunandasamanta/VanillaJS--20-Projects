@@ -1,1 +1,0 @@
-# vanillaJS 20 projects
