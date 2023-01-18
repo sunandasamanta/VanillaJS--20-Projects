@@ -49,9 +49,10 @@ async function getQuotes() {
     try {
         const response = await fetch(apiUrl);
         apiQuotes = await response.json();
+        // localStorage.setItem('apiQuotes', apiQuotes);
         newQuote();
     } catch (error) {
-        // Catch error here
+        getQuotes()
     }
 }
 
