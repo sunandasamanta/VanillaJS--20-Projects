@@ -1,4 +1,46 @@
+body {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
 main {
     max-width: 50rem;
+    margin: 0 auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div {
+    /* min-width: 300px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    background-color: rgba(255, 255, 255, 1);
+}
+
+p {
+    font-size: 1.5rem;
+
+}
+
+a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #000;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #1a73e8;
 }
