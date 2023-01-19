@@ -16,9 +16,11 @@ function loading() {
     quoteContainer.hidden = true;
 }
 
+// Remove loading spinner
+
 function complete() {
-    loader.hidden = true;
     quoteContainer.hidden = false;
+    loader.hidden = true;
 }
 
 // Show New Quote
@@ -48,11 +50,11 @@ async function getQuotes() {
     const apiUrl = 'https://type.fit/api/quotes';
     try {
         const response = await fetch(apiUrl);
-        const apiQuotes = await response.json();
-        // localStorage.setItem('apiQuotes', apiQuotes);
+        apiQuotes = await response.json();
         newQuote();
     } catch (error) {
-        getQuotes()
+        // getQuotes()
+        console.log(error)
     }
 }
 
