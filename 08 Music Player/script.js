@@ -78,7 +78,6 @@ function nextSong() {
 
 // Play or Pause Event Listener
 playBtn.addEventListener("click", () => (isPlaying ? pauseSong() : playSong()));
-// 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
 
 // Update DOM
 function loadSong(song) {
@@ -103,6 +102,9 @@ function updateProgressBar(e) {
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
         // update in minutes
+        const durationInMinutes = Math.floor(duration / 60);
+        const durationInSeconds = parseInt(duration % 60);
+        durationEl.textContent = durationInSeconds > 10 ? `${durationInMinutes}: ${durationInSeconds}` : `${durationInMinutes}: 0${durationInSeconds}`;
     }
 }
 
