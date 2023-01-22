@@ -62,6 +62,7 @@ function prevSong() {
     }
     loadSong(songs[songIndex]);
     currentTimeEl.textContent = '0:00';
+    progress.style.width = 0;
     playSong();
 }
 
@@ -73,6 +74,7 @@ function nextSong() {
     }
     loadSong(songs[songIndex]);
     currentTimeEl.textContent = '0:00';
+    progress.style.width = 0;
     playSong();
 }
 
