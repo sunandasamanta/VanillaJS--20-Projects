@@ -109,12 +109,12 @@ function updateProgressBar(e) {
         durationEl.textContent = durationInSeconds > 10 ? `${durationInMinutes}: ${durationInSeconds}` : `${durationInMinutes}: 0${durationInSeconds}`;
         }
         // Current time
-        // update in minutes
+        // update in minutes and seconds
         const currentTimeInMinutes = parseInt(currentTime / 60);
         const currentTimeInSeconds = parseInt(currentTime % 60);
         // Delay showing currentTime until it's calculated
         if (currentTimeInSeconds) {
-            currentTimeEl.textContent = currentTimeInSeconds < 10 ? `${currentTimeInMinutes}: 0${currentTimeInSeconds}` : `${currentTimeInMinutes}: ${currentTimeInSeconds}`;
+            currentTimeEl.textContent = currentTimeInSeconds < 10 ? `${currentTimeInMinutes}:0${currentTimeInSeconds}` : `${currentTimeInMinutes}:${currentTimeInSeconds}`;
         }
     }
 }
@@ -127,13 +127,18 @@ function spaceControl(event) {
     
 }
 
-// function progressBar(event) {
-//     console.log(event);
-// } 
+// Set Progree Bar
+function setProgressBar(event) {
+    const width = this.clientWidth;
+    const clickX = event.offsetX;
+    const { duration } = music;
+    music.currentTime = (clickX / width) * duration;
+} 
 
 // Next and Previous Event Listeners
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 window.addEventListener('keydown', spaceControl);
-// progressContainer.addEventListener('click', progressBar);
+music.addEventListener('ended', nextSong);
+progressContainer.addEventListener('click', setProgressBar);
