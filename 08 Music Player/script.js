@@ -60,8 +60,8 @@ function prevSong() {
     if (songIndex < songs.length) {
         songIndex = songs.length - 1;
     }
-    console.log(songIndex);
     loadSong(songs[songIndex]);
+    currentTimeEl.textContent = '0:00';
     playSong();
 }
 
@@ -71,8 +71,8 @@ function nextSong() {
     if (songIndex >= songs.length) {
         songIndex = 0;
     }
-    console.log(songIndex);
     loadSong(songs[songIndex]);
+    currentTimeEl.textContent = '0:00';
     playSong();
 }
 
@@ -85,6 +85,7 @@ function loadSong(song) {
     artist.textContent = song.artist;
     music.src = `./Assets/${song.name}.mp3`;
     image.src = `./Assets/${song.name}.jpg`;
+    currentTimeEl.textContent = '0:00';
 }
 // Current Song
 let songIndex = 0;
@@ -97,14 +98,24 @@ function updateProgressBar(e) {
     if (isPlaying) {
         const {duration, currentTime} = e.srcElement;
         // Update ProgressBar width
-        currentTimeEl.textContent = parseInt(currentTime);
-        durationEl.textContent = parseInt(duration);
+        // currentTimeEl.textContent = parseInt(currentTime);
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
         // update in minutes
-        const durationInMinutes = Math.floor(duration / 60);
+        const durationInMinutes = parseInt(duration / 60);
         const durationInSeconds = parseInt(duration % 60);
+        // Delay showing duration until it's calculated
+        if (durationInSeconds) {
         durationEl.textContent = durationInSeconds > 10 ? `${durationInMinutes}: ${durationInSeconds}` : `${durationInMinutes}: 0${durationInSeconds}`;
+        }
+        // Current time
+        // update in minutes
+        const currentTimeInMinutes = parseInt(currentTime / 60);
+        const currentTimeInSeconds = parseInt(currentTime % 60);
+        // Delay showing currentTime until it's calculated
+        if (currentTimeInSeconds) {
+            currentTimeEl.textContent = currentTimeInSeconds < 10 ? `${currentTimeInMinutes}: 0${currentTimeInSeconds}` : `${currentTimeInMinutes}: ${currentTimeInSeconds}`;
+        }
     }
 }
 
@@ -116,8 +127,13 @@ function spaceControl(event) {
     
 }
 
+// function progressBar(event) {
+//     console.log(event);
+// } 
+
 // Next and Previous Event Listeners
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 window.addEventListener('keydown', spaceControl);
+// progressContainer.addEventListener('click', progressBar);
