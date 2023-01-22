@@ -57,7 +57,7 @@ function pauseSong() {
 // Previous Song
 function prevSong() {
     songIndex--;
-    if (songIndex < songs.length) {
+    if (songIndex < 0) {
         songIndex = songs.length - 1;
     }
     loadSong(songs[songIndex]);
@@ -96,9 +96,8 @@ loadSong(songs[songIndex]);
 // Update Progress Bar and Time
 function updateProgressBar(e) {
     if (isPlaying) {
-        const {duration, currentTime} = e.srcElement;
+        const { duration, currentTime } = e.srcElement;
         // Update ProgressBar width
-        // currentTimeEl.textContent = parseInt(currentTime);
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
         // update in minutes
@@ -106,7 +105,7 @@ function updateProgressBar(e) {
         const durationInSeconds = parseInt(duration % 60);
         // Delay showing duration until it's calculated
         if (durationInSeconds) {
-        durationEl.textContent = durationInSeconds > 10 ? `${durationInMinutes}: ${durationInSeconds}` : `${durationInMinutes}: 0${durationInSeconds}`;
+            durationEl.textContent = durationInSeconds > 10 ? `${durationInMinutes}: ${durationInSeconds}` : `${durationInMinutes}: 0${durationInSeconds}`;
         }
         // Current time
         // update in minutes and seconds
@@ -122,9 +121,9 @@ function updateProgressBar(e) {
 // Play and Pause on space 
 function spaceControl(event) {
     if (event.code == "Space") {
-        isPlaying ? pauseSong() : playSong ();
+        isPlaying ? pauseSong() : playSong();
     }
-    
+
 }
 
 // Set Progree Bar
@@ -133,12 +132,12 @@ function setProgressBar(event) {
     const clickX = event.offsetX;
     const { duration } = music;
     music.currentTime = (clickX / width) * duration;
-} 
+}
 
 // Next and Previous Event Listeners
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
+music.addEventListener('ended', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 window.addEventListener('keydown', spaceControl);
-music.addEventListener('ended', nextSong);
 progressContainer.addEventListener('click', setProgressBar);
