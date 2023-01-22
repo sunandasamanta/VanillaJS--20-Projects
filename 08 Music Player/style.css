@@ -74,6 +74,10 @@ h3 {
     transition: width 0.1s linear;
 }
 
+.progress-container:hover .progress {
+    background: #1a73e8;
+}
+
 .duration-wrapper {
     position: relative;
     top: -25px;
